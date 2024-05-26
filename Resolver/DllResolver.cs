@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Resolver
 {
@@ -134,6 +133,41 @@ namespace Resolver
                 // Handle or log the exception as needed
                 throw new InvalidOperationException("Failed to load and create instance of the specified type.", ex);
             }
+        }
+
+        public new Type? GetType()
+        {
+            return this.StaticClass;
+        }
+
+        public string? GetNameSpace()
+        {
+            return this.StaticClass?.Namespace;
+        }
+
+        public Type[]? GetInterfaces()
+        {
+            return this.StaticClass?.GetInterfaces();
+        }
+
+        public string? GetInheritenceName()
+        {
+            return this.StaticClass?.BaseType?.FullName;
+        }
+
+        public Type? GetInheritence()
+        {
+            return this.StaticClass?.BaseType;
+        }
+
+        public object[]? GetAttributes(bool flag)
+        {
+            return this.StaticClass?.GetCustomAttributes(flag);
+        }
+
+        public MethodInfo[]? GetMethods()
+        {
+            return this.StaticClass?.GetMethods();
         }
     }
 }
