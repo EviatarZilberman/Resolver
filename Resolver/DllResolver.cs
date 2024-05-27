@@ -155,19 +155,69 @@ namespace Resolver
             return this.StaticClass?.BaseType?.FullName;
         }
 
-        public Type? GetInheritence()
+        public Type? GetInheritence() 
         {
             return this.StaticClass?.BaseType;
         }
 
-        public object[]? GetAttributes(bool flag)
+        public object[]? GetAttributes(bool flag = true)
         {
-            return this.StaticClass?.GetCustomAttributes(flag);
+            return this.StaticClass?.GetCustomAttributes(flag).ToArray();
         }
 
         public MethodInfo[]? GetMethods()
         {
             return this.StaticClass?.GetMethods();
+        }
+
+        public bool HasMethod(string name)
+        {
+            MethodInfo[]? methods = this.GetMethods();
+            return methods?.Any(x => x.Name == name) ?? false;
+        }
+
+        public bool HasAttribute(string name)
+        {
+            object[]? attributes = this.GetAttributes(true);
+            return attributes?.Any(x => x.GetType().Name == name) ?? false;
+        }
+
+        public bool ImplementsInterface(string name)
+        {
+            Type[]? interfaces = this.GetInterfaces();
+            return interfaces?.Any(x => x.GetType().Name == name) ?? false;
+        }
+
+        public string[]? GetClassesNames()
+        {
+            Assembly? assembly = Assembly.LoadFrom(DllPath);
+
+            Type[]? classes = assembly.GetTypes();
+            string[]? classesNames = new string[classes.Length];
+            for (int i = 0; i < classes.Length; i++)
+            {
+                classesNames[i] = classes[i].Name;
+            }
+            return classesNames;
+        }
+
+        public Type[]? GetClasses()
+        {
+            Assembly? assembly = Assembly.LoadFrom(this.DllPath);
+
+            Type[]? classes = assembly.GetTypes();
+            return classes;
+        }
+
+        public MemberInfo[]? GetAllMembers()
+        {
+            return StaticClass?.GetMembers();
+        }
+
+        public bool HasMember(string name)
+        {
+            MemberInfo[]? membersInfo = this.GetAllMembers();
+            return membersInfo?.Any(x => x.Name == name) ?? false;
         }
     }
 }

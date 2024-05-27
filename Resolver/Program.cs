@@ -1,14 +1,26 @@
-﻿using Resolver;
+﻿/*using Resolver;
+using System.Reflection;
 
-/*class Program
+*//*class Program
 {
     static void Main(string[] args)
-    {*/
-        string dllPath = "C:\\Users\\User\\Projects\\Python\\ThePackage\\ThePackage\\bin\\Debug\\net8.0\\ThePackage.dll";
-        DllResolver resolverIns = new DllResolver(dllPath);
-        DllResolver resolverSt = new DllResolver(dllPath);
+    {*//*
+string dllPath = "C:\\Users\\User\\Projects\\Python\\ThePackage\\ThePackage\\bin\\Debug\\net8.0\\ThePackage.dll";
+DllResolver resolverIns = new DllResolver(dllPath);
+DllResolver resolverSt = new DllResolver(dllPath);
+string className = "ThePackage.NewMathClass";
 
-        // Load instance class
+resolverIns.LoadInstanceAble(className);
+//Console.WriteLine(resolverIns.GetType());
+//MemberInfo[]? arr = resolverIns.GetAllMembers();
+*//*for (int i = 0; i < arr.Length; i++)
+{
+    Console.WriteLine(arr[i].ToString());
+}*//*
+Console.WriteLine(resolverIns.HasMember("Name"));
+Console.ReadLine();
+
+*//*        // Load instance class
         string className = "ThePackage.NewMathClass";
         resolverIns.LoadInstanceAble(className);
 
@@ -35,5 +47,5 @@
         Console.WriteLine(resolverIns.UseStaticMethodReturn("SayHi", new string[] { "Eviatar" }));
 
         Console.ReadLine();
-/*    }
+*//*    }*//*
 }*/
